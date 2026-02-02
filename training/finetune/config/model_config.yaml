@@ -1,0 +1,27 @@
+Qwen2.5-7B-Instruct:
+  hf_key: "/data/PLMs/Qwen2.5-7B-Instruct"
+  gradient_checkpointing: "true"
+Qwen2.5-32B-Instruct:
+  hf_key: "/disk0/share/models/Qwen2.5-32B-Instruct"
+  gradient_checkpointing: "true"
+Llama-3.1-8B-Instruct:
+  hf_key: "/data/PLMs/llama-3.1-8b-instruct"
+  gradient_checkpointing: "true"
+gemma-3-4b-it:
+  hf_key: "/data3/xuhaoming/models/gemma-3-4b-it"
+  gradient_checkpointing: "true"
+gemma-2-9b-it:
+  hf_key: "/data3/xuhaoming/models/gemma-2-9b-it"
+  gradient_checkpointing: "true"
+Olmo-3-7B-Instruct:
+  hf_key: "/disk0/share/models/Olmo-3-7B-Instruct"
+  gradient_checkpointing: "true"
+OLMo-2-0325-32B-Instruct:
+  hf_key: "/disk0/share/models/OLMo-2-0325-32B-Instruct"
+  gradient_checkpointing: "true"
+Qwen2.5-32B-Instruct-teacher-ans:
+  hf_key: "/disk0/xuhaoming/confidence/baselines/finetune/checkpoints/Qwen2.5-32B-Instruct_lora_trl_sft_lr1e-4_15e_baseline_qa/checkpoint-2343_merged"
+  gradient_checkpointing: "true"
+Qwen2.5-32B-Instruct-teacher-know:
+  hf_key: "/disk0/xuhaoming/confidence/baselines/finetune/checkpoints/Qwen2.5-32B-Instruct_lora_trl_sft_lr1e-4_15e_baseline_qa_new/checkpoint-4687-merged"
+  gradient_checkpointing: "true"

@@ -1,0 +1,40 @@
+model_family: Qwen2.5-32B-Instruct
+
+# Training method: sft, dpo, grpo, or context_injection
+training_method: grpo
+loss_type: grpo
+
+grpo:
+  reward_type: consistency
+  judge_model: null
+
+# LoRA configuration for parameter-efficient training
+LoRA:
+  r: 256
+  alpha: 512
+  dropout: 0.0
+
+# Data path - should contain prompt and solution fields
+data_path: "/data3/xuhaoming/Confidence/data/simpleqa_verified_for_training.json"
+
+# Training hyperparameters
+batch_size: 4
+gradient_accumulation_steps: 4
+num_epochs: 3
+learning_rate: 1e-5
+max_length: 2048
+
+# Saving configuration
+save_dir: "outputs/grpo_consistency_vllm"
+save_steps: 100
+save_total_limit: 3
+
+# Logging
+logging_steps: 10
+
+# Random seed for reproducibility
+seed: 42
+
+# System prompt and answer tags for GRPO
+use_system_prompt: true
+use_answer_tags: true

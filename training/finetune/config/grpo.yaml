@@ -1,0 +1,57 @@
+model_family: Qwen2.5-32B-Instruct
+
+# Training method: sft, dpo, grpo, or context_injection
+training_method: grpo
+loss_type: grpo
+
+
+reward_type: acc
+judge_model: "deepseek-chat"
+judge_device_map: "0,1"
+use_api: false # whether to use DeepSeek API for reward model
+api_key: null  # Set via DEEPSEEK_API_KEY environment variable
+base_url: "https://api.deepseek.com"
+
+# LoRA configuration for parameter-efficient training
+LoRA:
+  r: 256
+  alpha: 512
+  dropout: 0.0
+
+# Data path - should contain prompt and solution fields
+data_path: "/disk2/xuhaoming/confidence/data/simpleqa_verified_for_training.json"
+
+# GRPO-specific settings
+use_system_prompt: true  # Add system prompt to guide answer format
+use_answer_tags: true    # Wrap answers in <answer></answer> tags
+
+# Training hyperparameters
+
+batch_size: 1
+gradient_accumulation_steps: 4
+num_epochs: 1
+num_generations: 4
+generation_batch_size: 8
+lr: 5e-5
+weight_decay: 1e-4
+seed: 42
+max_length: 512
+max_prompt_length: 256
+max_completion_length: 256
+temperature: 0.7
+top_p: 0.9
+beta: 0.1  # KL penalty coefficient
+
+# Save and logging
+save_dir: /disk2/xuhaoming/confidence/baselines/finetune/checkpoints/Qwen2.5-32B-Instruct_grpo
+save_nums: 20  # Save 20 checkpoints during training
+log_nums: 20   # Log 20 times during training
+
+# Distributed training
+ds_config: '/disk2/xuhaoming/confidence/baselines/finetune/config/ds_z2_config.json'  # Use ZeRO Stage 2 for better memory efficiency
+
+# Resume training
+resume_from_checkpoint: False
+# Keep context_injection as False for GRPO
+context_injection: False
+swanlab_id:

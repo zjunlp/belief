@@ -1,0 +1,33 @@
+model_family: Qwen2.5-32B-Instruct
+
+# Training method: kl_sft (KL divergence regularized SFT)
+training_method: kl_sft
+
+LoRA:
+  r: 128
+  alpha: 16
+  dropout: 0.0
+
+# KL divergence specific settings
+kl_sft:
+  kl_weight: 0.1  # Weight for KL divergence loss (typical range: 0.01-0.5)
+  kl_temperature: 1.0  # Temperature for KL computation (default: 1.0)
+  kl_data_path: "/data3/xuhaoming/Confidence/data/kl_dataset.json"  # Separate dataset for KL divergence computation
+  ref_model_id: "Qwen/Qwen2.5-32B-Instruct"  # Reference model for KL computation
+  kl_sampling: "random"  # How to sample KL data: "random" or "sequential"
+
+data_path: "/data3/xuhaoming/Confidence/data/simple_qa_test_set.json"
+batch_size: 8  # Adjust for 32B model
+gradient_accumulation_steps: 2
+num_epochs: 10
+save_dir: /data3/xuhaoming/Confidence/baselines/finetune/checkpoints/Qwen2.5-32B-Instruct_lora_kl_sft
+lr: 2e-4
+weight_decay: 1e-4
+seed: 42
+max_length: 512
+ds_config: '/data3/xuhaoming/Confidence/baselines/finetune/config/ds_z0_config.json'
+save_nums: 10
+log_nums: 20
+resume_from_checkpoint: True
+swanlab_id:
+

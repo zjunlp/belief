@@ -1,0 +1,42 @@
+model_family: Qwen2.5-7B-Instruct
+
+# Training method: sft, dpo, grpo, or context_injection
+training_method: dpo
+
+# LoRA configuration for parameter-efficient training
+LoRA:
+  r: 128
+  alpha: 16
+  dropout: 0.0
+
+# Data path - should contain prompt, chosen, rejected fields
+data_path: "/data3/xuhaoming/Confidence/data/both_wrong_data_100.json"
+
+# Training hyperparameters
+batch_size: 8
+gradient_accumulation_steps: 2
+num_epochs: 10
+lr: 5e-5  # Lower learning rate for DPO (typically 5e-7 to 5e-5)
+weight_decay: 0.0  # DPO typically uses 0 weight decay
+seed: 42
+max_length: 512
+max_prompt_length: 256
+
+# DPO specific settings
+dpo:
+  beta: 0.1  # KL penalty coefficient (default: 0.1, typical range: 0.01-0.5)
+  loss_type: "sigmoid"  # Options: "sigmoid" (default), "hinge", "ipo", "kto_pair"
+
+# Save and logging
+save_dir: /data3/xuhaoming/Confidence/baselines/finetune/checkpoints/Qwen2.5-7B-Instruct_dpo
+save_nums: 10  # Save 10 checkpoints during training
+log_nums: 20   # Log 20 times during training
+
+# Distributed training
+ds_config: '/data3/xuhaoming/Confidence/baselines/finetune/config/ds_z0_config.json'
+
+# Resume training
+resume_from_checkpoint: True
+# Keep context_injection as False for DPO
+context_injection: False
+

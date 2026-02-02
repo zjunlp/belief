@@ -1,0 +1,43 @@
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+# Core / PyTorch stack
+torch==2.8.0
+deepspeed==0.17.6
+bitsandbytes==0.48.1
+vllm==0.11.0
+
+# LLM / HF ecosystem
+transformers==4.57.0
+trl==0.23.1
+peft==0.17.1
+datasets==4.1.1
+
+# Config / utils
+hydra-core==1.3.2
+omegaconf==2.3.0
+PyYAML==6.0.3
+tqdm==4.67.1
+
+# Data & scientific computing
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+
+# Runtime / serving
+fastapi==0.118.0
+uvicorn==0.37.0
+httpx==0.28.1
+pydantic==2.11.10
+prometheus-fastapi-instrumentator==7.1.0
+
+# Training / infra helpers
+accelerate==1.10.1
+ray==2.49.2
+fsspec==2025.9.0
+packaging==25.0
+safetensors==0.6.2
+sentencepiece==0.2.1
+tokenizers==0.22.1
+python-dotenv==1.1.1
+tabulate==0.9.0
+rich==14.1.0

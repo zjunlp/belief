@@ -1,0 +1,45 @@
+model_family: Qwen2.5-7B-Instruct
+
+# Training method: sft, dpo, grpo, or context_injection
+training_method: context_distillation
+
+# LoRA configuration for parameter-efficient training
+LoRA:
+  r: 128
+  alpha: 16
+  dropout: 0.0
+
+# Data path - should contain context, problem, answer fields
+# Or context + qa_pairs format
+data_path: "/disk1/xuhaoming/Confidence/data/both_wrong_data_100_contextinjection.json"
+
+# Training hyperparameters
+max_samples: # Limit to 100 samples for quicker testing
+batch_size: 8  # Smaller batch size due to dual model setup
+gradient_accumulation_steps: 2
+num_epochs: 10
+lr: 2e-4  # Lower learning rate for distillation
+weight_decay: 1e-4
+seed: 42
+max_length: 512
+swanlab_id:
+# CONTEXT-DISTILLATION specific settings (for backward compatibility)
+context_distillation:
+  distill_temperature: 1.0  # Temperature for distillation
+  use_distillation: True  # Enable knowledge distillation
+  collect_steps: 50  # Number of steps to collect before exiting
+# Save and logging
+save_dir: /disk1/xuhaoming/Confidence/baselines/finetune/checkpoints/Qwen2.5-7B-Instruct_lora_trl_lr2e-4_10e_both_wrong_100_contextinjection
+save_nums: 10  # Save 10 checkpoints during training
+log_nums: 20   # Log 20 times during training
+
+# Distributed training
+ds_config: '/disk1/xuhaoming/Confidence/baselines/finetune/config/ds_z0_config.json'
+
+# Resume training
+resume_from_checkpoint: False
+
+# Teacher model LoRA path for distillation
+teacher_lora_path: "/disk1/xuhaoming/Confidence/baselines/finetune/checkpoints/Qwen2.5-7B-Instruct_lora_trl_lr2e-4_10e_both_wrong_100_contextinjection"
+teacher_adapter_name: "teacher"
+student_adapter_name: "student"

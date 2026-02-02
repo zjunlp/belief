@@ -1,0 +1,31 @@
+model_family: Qwen2.5-7B-Instruct
+
+# Training method: sft (default), dpo, grpo, or context_injection
+training_method: sft
+
+belief_setting: none  # options: none, wrong_belief_entity, weak_belief, incorrect_belief, reinforce_belief
+belief_max_rounds: 3
+belief_system_prompt:
+
+LoRA:
+  r: 128
+  alpha: 16
+  dropout: 0.0
+
+data_path: "/data3/xuhaoming/Confidence/data/simple_qa_test_set.json"
+doc_data_path:
+batch_size: 16
+gradient_accumulation_steps: 1
+num_epochs: 10
+save_dir: /data3/xuhaoming/Confidence/baselines/finetune/checkpoints/Qwen2.5-7B-Instruct_lora_trl
+lr: 2e-4
+weight_decay: 1e-4
+seed: 42
+max_length: 512
+ds_config:
+save_nums: 10
+log_nums: 20
+resume_from_checkpoint: True
+swanlab_id:
+context_injection: False
+use_nq: False  # whether to use neighbor questions for data augmentation

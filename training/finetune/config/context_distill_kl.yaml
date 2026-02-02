@@ -1,0 +1,40 @@
+model_family: Qwen2.5-32B-Instruct
+
+training_method: context_distill_kl
+
+LoRA:
+  r: 128
+  alpha: 16
+  dropout: 0.0
+
+# Main training data for context distillation
+# Expected fields: {"text": ..., "question": ..., "answer": ...}
+data_path: "/disk0/xuhaoming/confidence/dataset/context_distill_train.json"
+
+batch_size: 1
+gradient_accumulation_steps: 1
+num_epochs: 1
+lr: 1e-4
+weight_decay: 1e-4
+seed: 42
+max_length: 1024
+
+ds_config: "/disk0/xuhaoming/confidence/baselines/finetune/config/ds_z3_config.json"
+
+save_dir: "/disk0/xuhaoming/confidence/baselines/finetune/checkpoints/Qwen2.5-32B-Instruct_lora_context_distill_kl"
+save_nums: 10
+log_nums: 20
+resume_from_checkpoint: False
+swanlab_id:
+
+context_distill_kl:
+  distill_temperature: 1.0
+  kl_weight: 0.1
+  kl_temperature: 1.0
+  kl_data_path: "/disk0/xuhaoming/confidence/dataset/commonsenseqa.json"
+  kl_sampling: "random"
+  sft_data_path: ""
+  sft_sampling: "random"
+  sft_weight: 1.0
+  teacher_model_id: "Qwen2.5-32B-Instruct-teacher"
+  ref_model_id: "Qwen2.5-32B-Instruct-teacher"
